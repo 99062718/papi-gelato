@@ -12,6 +12,7 @@ def stap1():
             for x in range(1, bolletjes+1):
                 smaak = smaakjes(x)
                 smaakjesLijst.append(smaak)
+            stap3(str(bolletjes), "bakje")
         else:
             print("Sorry, zulke grote bakken hebben we niet")
             stap1()
@@ -43,11 +44,23 @@ def stap2(bolletjes):
 
 def stap3(bolletjes, hoorntjeOfBakje):
     choice = input("Hier is uw " + hoorntjeOfBakje + " met " + bolletjes + " bolletje(s). Wilt u nog meer bestellen? (Y/N)\n").lower()
-    if choice != "y" and choice != "n":
+    if choice == "y":
+        stap1()
+    elif choice == "n":
+        print("Bedankt en tot ziens!")
+        bonnetje(int(bolletjes), hoorntjeOfBakje)
+    else:
         print("Sorry dat snap ik niet...")
         stap3(bolletjes, hoorntjeOfBakje)
-    else:
-        stap1() if choice == "y" else print("Bedankt en tot ziens!")
+
+def bonnetje(bolletjes, hoorntjeOfBakje):
+    totaalBolletjes = bolletjes * 1.1
+    totaal = totaalBolletjes + 1.25 + 1.1
+    print('---------["Papi Gelato"]---------')
+    a = print("Bolletjes    " + str(bolletjes) + " x 1.10   = " + str(totaalBolletjes)) if bolletjes > 0 else 0
+    b = print("Horrentje    1 x 1.25   = 1.25") if hoorntjeOfBakje == "hoorntje" else 0
+    c = print("Bakje        1 x 0.75   = 0.75") if hoorntjeOfBakje == "bakje" else 0
+    print("                        ------ +\nTotaal                  = " + str(totaal))
 
 print("Welkom bij Papi Gelato")
 
