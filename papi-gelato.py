@@ -1,17 +1,3 @@
-def smaakjes(bolletjeNummer):
-    smaak = input("Welke smaak wilt u voor bolletje nummer " + str(bolletjeNummer) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?\n").lower()
-    if smaak == "a":
-        return "aardbei"
-    elif smaak == "c":
-        return "chocolade"
-    elif smaak == "m":
-        return "munt"
-    elif smaak == "v":
-        return "vanille"
-    else:
-        print("Sorry dat snap ik niet...")
-        smaakjes(bolletjeNummer)
-
 def stap1():
     smaakjesLijst = []
     try:
@@ -33,6 +19,20 @@ def stap1():
         print("Sorry dat snap ik niet...")
         stap1()
 
+def smaakjes(bolletjeNummer):
+    smaak = input("Welke smaak wilt u voor bolletje nummer " + str(bolletjeNummer) + "? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?\n").lower()
+    if smaak == "a":
+        return "aardbei"
+    elif smaak == "c":
+        return "chocolade"
+    elif smaak == "m":
+        return "munt"
+    elif smaak == "v":
+        return "vanille"
+    else:
+        print("Sorry dat snap ik niet...")
+        smaakjes(bolletjeNummer)
+
 def stap2(bolletjes):
     hoorntjeOfBakje = input("Wilt u deze " + bolletjes + " bolletje(s) in A) een hoorntje of B) een bakje?\n").lower()
     if hoorntjeOfBakje != "hoorntje" and hoorntjeOfBakje != "bakje":
@@ -49,6 +49,6 @@ def stap3(bolletjes, hoorntjeOfBakje):
     else:
         stap1() if choice == "y" else print("Bedankt en tot ziens!")
 
-print("Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.")
+print("Welkom bij Papi Gelato")
 
 stap1()
