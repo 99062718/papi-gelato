@@ -1,4 +1,9 @@
+hoorntje = 0
+bakje = 0
+totaalBolletjes = 0
+
 def stap1():
+    global bakje
     smaakjesLijst = []
     try:
         bolletjes = int(input("Hoeveel bolletjes wilt u?\n"))
@@ -9,6 +14,7 @@ def stap1():
             stap2(str(bolletjes))
         elif bolletjes >= 4 and bolletjes <= 8:
             print("Dan krijgt u van mij een bakje met " + str(bolletjes) + " bolletjes")
+            bakje += 1
             for x in range(1, bolletjes+1):
                 smaak = smaakjes(x)
                 smaakjesLijst.append(smaak)
@@ -35,18 +41,25 @@ def smaakjes(bolletjeNummer):
         smaakjes(bolletjeNummer)
 
 def stap2(bolletjes):
+    global hoorntje
+    global bakje
     hoorntjeOfBakje = input("Wilt u deze " + bolletjes + " bolletje(s) in A) een hoorntje of B) een bakje?\n").lower()
     if hoorntjeOfBakje != "hoorntje" and hoorntjeOfBakje != "bakje":
         print("Sorry dat snap ik niet...")
         stap2(bolletjes)
     else:
+        hoorntje = hoorntje + 1 if hoorntjeOfBakje == "hoorntje" else hoorntje + 0
+        bakje = bakje + 1 if hoorntjeOfBakje == "bakje" else bakje + 0
         stap3(bolletjes, hoorntjeOfBakje)
 
 def stap3(bolletjes, hoorntjeOfBakje):
+    global totaalBolletjes
     choice = input("Hier is uw " + hoorntjeOfBakje + " met " + bolletjes + " bolletje(s). Wilt u nog meer bestellen? (Y/N)\n").lower()
     if choice == "y":
+        totaalBolletjes += int(bolletjes)
         stap1()
     elif choice == "n":
+        totaalBolletjes += int(bolletjes)
         print("Bedankt en tot ziens!")
         bonnetje(int(bolletjes), hoorntjeOfBakje)
     else:
@@ -54,12 +67,14 @@ def stap3(bolletjes, hoorntjeOfBakje):
         stap3(bolletjes, hoorntjeOfBakje)
 
 def bonnetje(bolletjes, hoorntjeOfBakje):
-    totaalBolletjes = bolletjes * 1.1
-    totaal = totaalBolletjes + 1.25 + 1.1
+    totaalBolletjesPrijs = round(totaalBolletjes * 1.1, 2)
+    totaalHorntjesPrijs = round(hoorntje * 1.25, 2)
+    totaalBakjesPrijs = round(bakje * 0.75, 2)
+    totaal = totaalBolletjesPrijs + totaalHorntjesPrijs + totaalBakjesPrijs
     print('---------["Papi Gelato"]---------')
-    a = print("Bolletjes    " + str(bolletjes) + " x 1.10   = " + str(totaalBolletjes)) if bolletjes > 0 else 0
-    b = print("Horrentje    1 x 1.25   = 1.25") if hoorntjeOfBakje == "hoorntje" else 0
-    c = print("Bakje        1 x 0.75   = 0.75") if hoorntjeOfBakje == "bakje" else 0
+    a = print("Bolletjes    " + str(totaalBolletjes) + " x 1.10   = " + str(totaalBolletjesPrijs)) if bolletjes > 0 else 0
+    b = print("Horrentje    " + str(hoorntje) + " x 1.25   = " + str(totaalHorntjesPrijs)) if hoorntje > 0 else 0
+    c = print("Bakje        " + str(bakje) + " x 0.75   = " + str(totaalBakjesPrijs)) if bakje > 0 else 0
     print("                        ------ +\nTotaal                  = " + str(totaal))
 
 print("Welkom bij Papi Gelato")
